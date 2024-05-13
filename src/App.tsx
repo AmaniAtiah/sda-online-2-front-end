@@ -16,6 +16,7 @@ import "./App.css"
 
 function App() {
   const getProducts = async () => {
+    // show the list of products
     try {
       const res = await api.get("/products")
       return res.data
