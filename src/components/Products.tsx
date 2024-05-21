@@ -4,11 +4,14 @@ import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "@/toolkit/store"
 import { fetchProducts } from "@/toolkit/slices/productSlice"
 import { Button } from "./ui/button"
+import useProductsState from "@/hooks/useProductsState"
 
 const Products = () => {
-  const { products, isLoading, error, totalPages } = useSelector(
-    (state: RootState) => state.productR
-  )
+  // const { products, isLoading, error, totalPages } = useSelector(
+  //   (state: RootState) => state.productR
+  // )
+
+  const { products, isLoading, error, totalPages } = useProductsState()
 
   const dispatch: AppDispatch = useDispatch()
 

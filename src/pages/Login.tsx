@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { loginUser } from "@/toolkit/slices/userSlice"
 import { AppDispatch } from "@/toolkit/store"
 import { LoginFormData } from "@/types"
-import { toastError, toastSuccess } from "@/utils/toast"
+import { toastError, toastSuccess } from "@/utils/helper"
 
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useDispatch } from "react-redux"
@@ -21,9 +21,11 @@ export const Login = () => {
   const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
     try {
       const response = await dispatch(loginUser(data))
-      console.log("Response from Register:" + response)
-      toastSuccess(response.payload.message)
-      navigate("/")
+      // console.log("Response from Register:" + response)
+      const isAdmin = response.payload.data.loggedInUser.isAdmin
+      navigate(isAdmin ? "/dashboard/admin" : "/dashboard/user")
+      // toastSuccess(response.payload.message)
+      // navigate("/dashboard/user")
     } catch (error: any) {
       toastError(error.message || "Login failed")
     }

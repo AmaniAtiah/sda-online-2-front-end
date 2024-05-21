@@ -1,3 +1,4 @@
+import useProductsState from "@/hooks/useProductsState"
 import { fetchProductById } from "@/toolkit/slices/productSlice"
 import { AppDispatch, RootState } from "@/toolkit/store"
 import React, { useEffect } from "react"
@@ -6,7 +7,9 @@ import { useParams } from "react-router-dom"
 
 export const ProductDetails = () => {
   const { productId } = useParams<{ productId: string }>()
-  const { product, isLoading, error } = useSelector((state: RootState) => state.productR)
+  // const { product, isLoading, error } = useSelector((state: RootState) => state.productR)
+
+  const { product, isLoading, error } = useProductsState()
 
   const dispatch: AppDispatch = useDispatch()
 

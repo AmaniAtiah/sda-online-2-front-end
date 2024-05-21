@@ -1,6 +1,6 @@
 import { registerUser } from "@/toolkit/slices/userSlice"
 import { AppDispatch } from "@/toolkit/store"
-import { toastError, toastSuccess } from "@/utils/toast"
+import { toastError, toastSuccess } from "@/utils/helper"
 import React from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useDispatch } from "react-redux"
@@ -132,6 +132,7 @@ export const Register = () => {
           <label htmlFor="address">Address: </label>
           <textarea id="" {...register("address")}></textarea>
         </div>
+
         <button type="submit" className="btn">
           Register
         </button>
