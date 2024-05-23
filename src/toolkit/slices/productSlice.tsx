@@ -1,5 +1,6 @@
 import api from "@/api"
-import { ProductState } from "@/types"
+import { CreateProductForBackend, CreateProductFormData, Product, ProductState } from "@/types"
+import { getToken } from "@/utils/localStorage"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { useEffect } from "react"
 
@@ -16,15 +17,15 @@ export const fetchProducts = createAsyncThunk(
   async ({
     pageNumber,
     pageSize,
-    searchTerm,
-    sortBy,
-    sortDirection
+    searchTerm = "",
+    sortBy = "",
+    sortDirection = ""
   }: {
     pageNumber: number
     pageSize: number
-    searchTerm: string
-    sortBy: string
-    sortDirection: string
+    searchTerm?: string
+    sortBy?: string
+    sortDirection?: string
   }) => {
     const response =
       searchTerm.length > 0
@@ -48,6 +49,50 @@ export const fetchProductById = createAsyncThunk(
   }
 )
 
+export const deleteProduct = createAsyncThunk(
+  "products/deleteProduct",
+  async (productId: string) => {
+    await api.delete(`/products/${productId}`, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`
+      }
+    })
+    return productId
+  }
+)
+
+export const createProduct = createAsyncThunk(
+  "products/createProduct",
+  async (newProduct: CreateProductForBackend) => {
+    const response = await api.post(`/products`, newProduct, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`
+      }
+    })
+    // console.log(response.data.data)
+    return response.data.data
+  }
+)
+
+export const updateProduct = createAsyncThunk(
+  "products/updateProduct",
+  async ({
+    updateProductData,
+    productId
+  }: {
+    updateProductData: CreateProductForBackend
+    productId: string
+  }) => {
+    const response = await api.put(`/products/${productId}`, updateProductData, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`
+      }
+    })
+    // console.log(response)
+    return response.data
+  }
+)
+
 const productSlice = createSlice({
   name: "products",
   initialState: initialState,
@@ -64,6 +109,34 @@ const productSlice = createSlice({
       // console.log(action.payload.data)
       state.product = action.payload.data
       state.isLoading = false
+    })
+
+    builder.addCase(deleteProduct.fulfilled, (state, action) => {
+      // console.log(action.payload.data.items)
+      state.products = state.products.filter((product) => product.productId !== action.payload)
+      state.isLoading = false
+    })
+
+    builder.addCase(createProduct.fulfilled, (state, action) => {
+      // console.log(action.payload.data.items)
+      state.products.push(action.payload)
+      state.isLoading = false
+    })
+
+    builder.addCase(updateProduct.fulfilled, (state, action) => {
+      console.log(action.payload.data)
+      const foundProduct = state.products.find(
+        (product) => product.productId === action.payload.data.productId
+      )
+      if (foundProduct) {
+        foundProduct.image = action.payload.data.image
+        foundProduct.categoriesId = action.payload.data.categoriesId
+
+        foundProduct.price = action.payload.data.price
+        foundProduct.quantity = action.payload.data.quantity
+        foundProduct.name = action.payload.data.name
+        foundProduct.description = action.payload.data.description
+      }
     })
 
     builder.addMatcher(

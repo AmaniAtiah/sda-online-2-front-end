@@ -10,10 +10,10 @@ import {
   AdminDashboard,
   UserProfile,
   UserOrder,
-  Products,
-  Categories,
-  Orders,
-  Users
+  AdminProductsManagement,
+  AdminCategoriesManagement,
+  AdminOrders,
+  AdminUsersManagement
 } from "@/pages"
 import { ProductDetails } from "@/pages/ProductDetails"
 
@@ -43,10 +43,10 @@ export const Index = () => {
 
           <Route path="/dashboard" element={<AdminRoute />}>
             <Route path="admin" element={<AdminDashboard />} />
-            <Route path="admin/products" element={<Products />} />
-            <Route path="admin/orders" element={<Orders />} />
-            <Route path="admin/users" element={<Users />} />
-            <Route path="admin/categories" element={<Categories />} />
+            <Route path="admin/products" element={<AdminProductsManagement />} />
+            <Route path="admin/orders" element={<AdminOrders />} />
+            <Route path="admin/users" element={<AdminUsersManagement />} />
+            <Route path="admin/categories" element={<AdminCategoriesManagement />} />
           </Route>
 
           <Route path="*" element={<Error />} />

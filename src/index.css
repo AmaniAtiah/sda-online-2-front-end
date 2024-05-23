@@ -65,6 +65,44 @@ textarea {
   resize: none;
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px;
+  text-align: left;
+}
+
+th,
+td {
+  padding: 12px 15px;
+}
+th {
+  background-color: #4caf50;
+  color: white;
+  text-align: left;
+}
+
+tr {
+  border-bottom: 1px solid #ddd;
+}
+
+tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+/* tr:last-of-type {
+  background-color: #4caf50;
+} */
+
+.table-img {
+  width: 100px;
+  height: 100px;
+}
+
+.delete-btn {
+  background-color: #f44336;
+}
+
 nav {
   background-color: var(--primary-color);
   padding: 1rem 0;
