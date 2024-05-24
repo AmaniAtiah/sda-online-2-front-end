@@ -3,6 +3,7 @@ import { CreateProductForBackend, CreateProductFormData, Product, ProductState }
 import { getToken } from "@/utils/localStorage"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { useEffect } from "react"
+import { fetchCategories } from "./categorySlice"
 
 const initialState: ProductState = {
   products: [],
@@ -35,6 +36,7 @@ export const fetchProducts = createAsyncThunk(
         : await api.get(
             `/products?pageNumber=${pageNumber}&pageSize=${pageSize}&sortBy=${sortBy}&sortDirection=${sortDirection}`
           )
+
     //   console.log(response.data)
     return response.data
   }
@@ -123,19 +125,31 @@ const productSlice = createSlice({
       state.isLoading = false
     })
 
-    builder.addCase(updateProduct.fulfilled, (state, action) => {
-      console.log(action.payload.data)
-      const foundProduct = state.products.find(
-        (product) => product.productId === action.payload.data.productId
-      )
-      if (foundProduct) {
-        foundProduct.image = action.payload.data.image
-        foundProduct.categoriesId = action.payload.data.categoriesId
+    // builder.addCase(updateProduct.fulfilled, (state, action) => {
+    //   console.log(action.payload.data)
+    //   const foundProduct = state.products.find(
+    //     (product) => product.productId === action.payload.data.productId
+    //   )
+    //   if (foundProduct) {
+    //     foundProduct.image = action.payload.data.image
 
-        foundProduct.price = action.payload.data.price
-        foundProduct.quantity = action.payload.data.quantity
-        foundProduct.name = action.payload.data.name
-        foundProduct.description = action.payload.data.description
+    //     foundProduct.categoriesId = action.payload.data.categoriesId
+
+    //     foundProduct.price = action.payload.data.price
+    //     foundProduct.quantity = action.payload.data.quantity
+    //     foundProduct.name = action.payload.data.name
+    //     foundProduct.description = action.payload.data.description
+    //   }
+    // })
+
+    builder.addCase(updateProduct.fulfilled, (state, action) => {
+      const updatedProduct = action.payload.data // Assuming the server response includes the updated product data with the category name
+      const existingProductIndex = state.products.findIndex(
+        (product) => product.productId === updatedProduct.productId
+      )
+
+      if (existingProductIndex !== -1) {
+        state.products[existingProductIndex] = updatedProduct
       }
     })
 

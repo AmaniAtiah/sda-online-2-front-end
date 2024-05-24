@@ -3,12 +3,7 @@ import { AppDispatch } from "@/toolkit/store"
 import React, { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import useCategoriesState from "@/hooks/useCategoriesState"
-import {
-  createCategory,
-  deleteCategory,
-  fetchCategories,
-  updateCategory
-} from "@/toolkit/slices/categorySlice"
+import { fetchCategories } from "@/toolkit/slices/categorySlice"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { CreateProductFormData, Product } from "@/types"
 import useProductsState from "@/hooks/useProductsState"
@@ -94,7 +89,8 @@ export const AdminProductsManagement = () => {
         setIsEdit(false)
       } else {
         await dispatch(createProduct(productData))
-        // await dispatch(fetchProducts({ pageNumber, pageSize }))
+        // fetch product
+        await dispatch(fetchProducts({ pageNumber, pageSize }))
       }
       reset()
     } catch (error) {
