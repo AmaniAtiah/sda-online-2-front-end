@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --primary-color: rgb(11, 181, 48);
   --secundary-color: rgb(36, 122, 55, 0.9);
@@ -15,6 +19,42 @@
   text-decoration: none;
 }
 
+input:focus {
+  outline: none;
+}
+
+.customInputLabel {
+  color: black !important;
+}
+
+.focusedInput .MuiOutlinedInput-notchedOutline {
+  border-color: black !important;
+}
+
+.custom-select {
+  color: black;
+  border-color: black;
+}
+
+.card-wrapper {
+  min-height: 250px;
+  width: 300px;
+  max-width: 100%;
+  min-width: 100%;
+  margin-top: 1.5rem;
+}
+
+/* cheked */
+
+/* 
+body {
+  font-family: "Roboto", sans-serif;
+} */
+
+.btn__color {
+  color: #ffffff;
+  background-color: #f44336;
+}
 html {
   scroll-behavior: smooth;
 }
@@ -103,10 +143,18 @@ tr:nth-of-type(even) {
   background-color: #f44336;
 }
 
+.accountIcon {
+  color: black;
+  font-size: 3rem;
+}
 nav {
-  background-color: var(--primary-color);
   padding: 1rem 0;
   height: 10vh;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.menu_open {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .nav__lists {
