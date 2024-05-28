@@ -5,7 +5,7 @@ let baseURL = "https://sda-online-2-csharp-backend-teamwork-orit.onrender.com/ap
 
 if (!isDevelopment) {
   // Update this later when you have a working backend server
-  baseURL = "http://localhost:5125/api/v1"
+  baseURL = "https://sda-online-2-csharp-backend-teamwork-orit.onrender.com/api/"
 }
 
 const api = axios.create({
