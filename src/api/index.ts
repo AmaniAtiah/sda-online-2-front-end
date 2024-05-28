@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const isDevelopment = import.meta.env.MODE === "development"
-let baseURL = "https://sda-online-2-csharp-backend-teamwork-orit.onrender.com/api/"
+let baseURL = "https://sda-online-2-csharp-backend-teamwork-orit.onrender.com/api"
 
 if (!isDevelopment) {
   // Update this later when you have a working backend server
