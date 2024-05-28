@@ -37,6 +37,12 @@ export type ProductState = {
   isLoading: boolean
 }
 
+export type CartItem = Product & { orderQuantity: number }
+
+export type CartState = {
+  cartItems: CartItem[]
+}
+
 export type User = {
   userId?: string
   userName: string
@@ -111,4 +117,27 @@ export type CreateProductForBackend = {
   image: string
   quantity: number
   categoriesId: string
+}
+
+export type Order = {
+  orderId: string
+  orderDate: string
+  totalPrice: number
+  orderStatus: string
+
+  userId: string
+  user: User
+}
+
+export type OrderState = {
+  orders: Order[]
+  totalPages: number
+  order: Order | null
+  error: null | string
+  isLoading: boolean
+}
+
+// create a new Order
+export type CreateOrder = {
+  productIds: string[]
 }

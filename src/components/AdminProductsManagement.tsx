@@ -46,7 +46,15 @@ export const AdminProductsManagement = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await dispatch(fetchProducts({ pageNumber, pageSize }))
+      await dispatch(
+        fetchProducts({
+          pageNumber,
+          pageSize,
+          selectedCategories: [],
+          minPrice: undefined,
+          maxPrice: undefined
+        })
+      )
     }
     fetchData()
   }, [pageNumber])
@@ -90,7 +98,7 @@ export const AdminProductsManagement = () => {
       } else {
         await dispatch(createProduct(productData))
         // fetch product
-        await dispatch(fetchProducts({ pageNumber, pageSize }))
+        // await dispatch(fetchProducts({ pageNumber, pageSize }))
       }
       reset()
     } catch (error) {

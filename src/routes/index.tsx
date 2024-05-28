@@ -13,7 +13,9 @@ import {
   AdminProductsManagement,
   AdminCategoriesManagement,
   AdminOrders,
-  AdminUsersManagement
+  AdminUsersManagement,
+  Cart,
+  OrderDetails
 } from "@/pages"
 import { ProductDetails } from "@/pages/ProductDetails"
 
@@ -34,6 +36,7 @@ export const Index = () => {
           <Route path="/products/:productId" element={<ProductDetails />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/cart" element={<Cart />} />
 
           <Route path="/dashboard" element={<ProtectedRoute />}>
             <Route path="user" element={<UserDashboard />} />
@@ -45,6 +48,7 @@ export const Index = () => {
             <Route path="admin" element={<AdminDashboard />} />
             <Route path="admin/products" element={<AdminProductsManagement />} />
             <Route path="admin/orders" element={<AdminOrders />} />
+            <Route path="admin/orders/:orderId" element={<OrderDetails />} />
             <Route path="admin/users" element={<AdminUsersManagement />} />
             <Route path="admin/categories" element={<AdminCategoriesManagement />} />
           </Route>

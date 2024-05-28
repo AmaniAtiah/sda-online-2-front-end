@@ -7,10 +7,15 @@ import { logoutUser } from "@/toolkit/slices/userSlice"
 import { AppDispatch, RootState } from "@/toolkit/store"
 import { useDispatch } from "react-redux"
 import AccountCircleIcon from "@mui/icons-material/AccountCircle"
+import CartIcon from "../CartIcon"
+import useCartState from "@/hooks/useCartState"
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
 
 const Navbar = () => {
   const dispatch: AppDispatch = useDispatch()
   const { isLoggedIn, userData } = useUsersState()
+  const { cartItems } = useCartState()
+
   const [menuOpen, setMenuOpen] = useState(false)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
@@ -45,6 +50,10 @@ const Navbar = () => {
       </div>
       <div className="flex items-center">
         <div className="hidden md:block">
+          <Link to="/cart" className="text-black mx-4">
+            <ShoppingCartIcon />
+            {cartItems && cartItems.length > 0 && <span>{cartItems.length}</span>}{" "}
+          </Link>
           {isLoggedIn && (
             <>
               <Button onClick={handleMenuOpen} className="mx-4">
@@ -65,6 +74,10 @@ const Navbar = () => {
           )}
         </div>
         <div className="md:hidden">
+          <Link to="/cart" className="text-black mx-4">
+            <ShoppingCartIcon />
+            {cartItems && cartItems.length > 0 && <span>{cartItems.length}</span>}{" "}
+          </Link>
           {isLoggedIn && (
             <>
               <Button onClick={handleMenuOpen} className="mx-4">

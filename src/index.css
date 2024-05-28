@@ -2,13 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* :root {
   --primary-color: rgb(11, 181, 48);
   --secundary-color: rgb(36, 122, 55, 0.9);
   --padding: 0.5rem;
   --border-radius: 0.6rem;
   --box-shadow: 0.1rem 0.2rem 0.8rem rgpa(205, 202, 202, 0.5);
-}
+} */
 
 * {
   box-sizing: border-box;
@@ -19,6 +19,9 @@
   text-decoration: none;
 }
 
+.button__login {
+  background-color: #31363f !important;
+}
 input:focus {
   outline: none;
 }
@@ -29,6 +32,40 @@ input:focus {
 
 .focusedInput .MuiOutlinedInput-notchedOutline {
   border-color: black !important;
+}
+
+.footer {
+  background-color: #31363f;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.subscribe-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.subscribe-form label {
+  margin-right: 10px;
+}
+
+.subscribe-form input[type="email"] {
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  margin-right: 10px;
+  width: 200px;
+}
+
+.subscribe-form input[type="submit"] {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #dac0a3;
+  color: white;
+  cursor: pointer;
 }
 
 .custom-select {
@@ -44,12 +81,46 @@ input:focus {
   margin-top: 1.5rem;
 }
 
+button.delete__product {
+  color: black;
+  margin-left: 2rem;
+}
+/* 
+.delete__product:hover {
+  color: red;
+} */
+
 /* cheked */
 
 /* 
 body {
   font-family: "Roboto", sans-serif;
 } */
+
+.cart-items {
+  flex: 2;
+}
+
+.cart-item {
+  margin: 1rem;
+}
+
+.cart-item__left {
+  flex: 1;
+}
+
+.cart-item__center {
+  flex: 1.5;
+}
+
+.cart-item__right {
+  flex: 0.5;
+}
+
+.cart-imgg {
+  width: 100px;
+  height: 100px;
+}
 
 .btn__color {
   color: #ffffff;
@@ -143,6 +214,15 @@ tr:nth-of-type(even) {
   background-color: #f44336;
 }
 
+.button__cart {
+  color: #31363f !important;
+  border-color: #31363f !important;
+  margin: 10px !important;
+}
+
+.delete__icon {
+  color: #31363f !important;
+}
 .accountIcon {
   color: black;
   font-size: 3rem;
@@ -244,23 +324,6 @@ main {
   gap: 0.5rem;
 }
 /* footer  */
-
-.footer {
-  background-color: var(--primary-color);
-  padding: 1rem;
-  height: 10vh;
-  color: white;
-  font-size: 1.1rem;
-}
-.btn-subscribe {
-  margin-left: -5px;
-}
-
-.footer__input {
-  border: none;
-  padding: var(--padding);
-  width: 20rem;
-}
 
 /* responsive  */
 

@@ -11,6 +11,7 @@ export const Home = () => {
           <ProductSidebar />
         </div> */}
         {/* <div className="main-container"> */}
+
         <Products />
         {/* </div> */}
       </div>

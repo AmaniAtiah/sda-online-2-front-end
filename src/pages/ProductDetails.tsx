@@ -1,6 +1,8 @@
 import useProductsState from "@/hooks/useProductsState"
+import { addToCart } from "@/toolkit/slices/cartSlice"
 import { fetchProductById } from "@/toolkit/slices/productSlice"
 import { AppDispatch, RootState } from "@/toolkit/store"
+import { Product } from "@/types"
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
@@ -13,13 +15,16 @@ export const ProductDetails = () => {
 
   const dispatch: AppDispatch = useDispatch()
 
-  console.log(product)
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(fetchProductById(productId))
     }
     fetchData()
   }, [])
+
+  const handleAddToCart = (product: Product) => {
+    dispatch(addToCart(product))
+  }
 
   return (
     <article className="details">
@@ -38,6 +43,9 @@ export const ProductDetails = () => {
             <p className="product-details__quantity">Quantity: {product.quantity}</p>
             <p className="product-details__price">Price: {product.price}</p>
             <p>Prroduct Added: {new Date(product.createAt).toLocaleDateString()}</p>
+            <button type="button" className="btn" onClick={() => handleAddToCart(product)}>
+              Add to Cart
+            </button>
           </div>
         </div>
       )}

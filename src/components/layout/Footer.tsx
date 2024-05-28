@@ -1,23 +1,16 @@
-import { Link } from "react-router-dom"
+import React from "react"
 
 const Footer = () => {
   return (
-    <footer className="footer flex-space-around">
-      <div className="flex-space-around">
-        <label htmlFor="subscribe">Subsdribe to Newsetter</label>
-        <input
-          type="email"
-          name="subscribe"
-          id="subscribe"
-          className="footer-input"
-          placeholder="Enter your Email Address"
-        />
-        <button className="btn btn-subscribe">Subscribe </button>
-      </div>
-      <div>
-        <p>Copyright 2024 Amani Atiah . All right reserved </p>
-      </div>
-    </footer>
+    <div>
+      <footer className="footer">
+        <form className="subscribe-form" action="#" method="post">
+          <label htmlFor="email">Subscribe for updates:</label>
+          <input type="email" id="email" name="email" placeholder="Your email address" required />
+          <input type="submit" value="Subscribe" />
+        </form>
+      </footer>
+    </div>
   )
 }
 
