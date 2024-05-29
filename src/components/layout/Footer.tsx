@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="text-white py-4 fixed bottom-0 left-0 w-full footer">
       <div className="container mx-auto">
         <form className="flex items-center justify-center">
-          <label className="mr-2">Subscribe for updates:</label>
+          <label className="mr-2 subscribe__label">Subscribe for updates:</label>
           <input
             type="email"
             id="email"

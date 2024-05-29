@@ -110,7 +110,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem;
-  background-color: #102c57; /* Dark blue */
+  /* background-color: #102c57; Dark blue */
 }
 
 .navbar__logo {
@@ -136,7 +136,7 @@ body {
 }
 
 .navbar__link {
-  color: #eadbc8; /* Cream */
+  color: #102c57; /* Cream */
   text-decoration: none;
   margin-bottom: 1rem;
 }
@@ -172,24 +172,28 @@ body {
 
 .button__login {
   font-size: 1rem;
-  background-color: #eadbc8;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  color: #102c57;
-}
-.button__login:hover {
-  background-color: #dac0a3;
-}
-
-.button__register {
-  font-size: 1rem;
-  border: 1px solid #dac0a3;
-
+  background-color: #102c57;
   padding: 0.5rem 1rem;
   border-radius: 5px;
   color: #eadbc8;
 }
+/* .button__login:hover {
+  background-color: #eadbc8;
+  color: #102c57;
+} */
 
+.button__register {
+  font-size: 1rem;
+  border: 1px solid #102c57;
+
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  color: #102c57;
+}
+
+.subscribe__label {
+  color: #102c57;
+}
 .button__logout {
   font-size: 1rem;
   background-color: #eadbc8;
@@ -221,7 +225,7 @@ body {
 /* footer */
 .footer {
   position: sticky;
-  background-color: #102c57;
+  background-color: #e4e4e4;
   display: flex;
   justify-content: center;
   align-items: center;
