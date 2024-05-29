@@ -9,6 +9,45 @@
   --border-radius: 0.6rem;
   --box-shadow: 0.1rem 0.2rem 0.8rem rgpa(205, 202, 202, 0.5);
 } */
+
+.hero {
+  background-image: url("/public/hero.jpg"); /* Replace 'path_to_your_background_image.jpg' with the path to your image */
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+}
+
+.hero h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 1.5em;
+  margin-bottom: 30px;
+}
+
+.button__hero {
+  padding: 10px 20px;
+  background-color: #eadbc8;
+  color: #102c57;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1.2em;
+  transition: background-color 0.3s ease;
+}
+
+.button__hero:hover {
+  background-color: #102c57;
+  color: #eadbc8;
+}
+
 .image__preview {
   width: 100px;
   height: 100px;
