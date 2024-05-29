@@ -123,7 +123,7 @@ export type Order = {
   orderId: string
   orderDate: string
   totalPrice: number
-  orderStatus: string
+  status: string
 
   userId: string
   user: User

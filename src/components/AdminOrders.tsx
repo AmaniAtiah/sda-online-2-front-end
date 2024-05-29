@@ -21,35 +21,45 @@ export const AdminOrders = () => {
     }
     fetchData()
   }, [pageNumber])
+
+  const getStatusLabel = (status: number | string) => {
+    switch (status) {
+      case 0:
+        return "Pending"
+      case 1:
+        return "Delivered"
+      case 2:
+        return "Processing"
+      // Add more cases for other status values if needed
+      default:
+        return "Unknown"
+    }
+  }
+
   return (
-    <div className="container flex-space-around">
+    <div className="container mx-auto px-4">
       <AdminSidebar />
       <div className="main-container">
-        <h2>List of Orders</h2>
+        <h2 className="text-2xl font-bold mb-4">List of Orders</h2>
 
-        <table>
+        <table className="w-full border-collapse border border-gray-300">
           <thead>
-            <tr>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Actions</th>
+            <tr className="bg-gray-200">
+              <th className="border border-gray-300 px-4 py-2">Name</th>
+              <th className="border border-gray-300 px-4 py-2">Status</th>
+              <th className="border border-gray-300 px-4 py-2">Total Price</th>
             </tr>
           </thead>
           <tbody>
             {orders &&
               orders.length > 0 &&
               orders.map((order) => (
-                // <SingleCategory key={category.categoryId} category={category} />
-                <tr key={order.orderId}>
-                  <td>{order.user.firstName}</td>
-
-                  <td>
-                    {/* show details order click */}
-
-                    <Link to={`/dashboard/admin/orders/${order.orderId}`}>
-                      <button>Show Details</button>
-                    </Link>
+                <tr key={order.orderId} className="bg-white">
+                  <td className="border border-gray-300 px-4 py-2">{order.user.firstName}</td>
+                  <td className="border border-gray-300 px-4 py-2">
+                    {getStatusLabel(order.status)}
                   </td>
+                  <td className="border border-gray-300 px-4 py-2">{order.totalPrice}</td>
                 </tr>
               ))}
           </tbody>

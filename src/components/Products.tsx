@@ -4,9 +4,6 @@ import { useDispatch } from "react-redux"
 import { AppDispatch } from "@/toolkit/store"
 import { fetchProducts } from "@/toolkit/slices/productSlice"
 import useProductsState from "@/hooks/useProductsState"
-import { TextField, Select, MenuItem, Button, InputAdornment, withStyles } from "@mui/material"
-import { SelectChangeEvent } from "@mui/material/Select"
-import SearchIcon from "@mui/icons-material/Search"
 import useCategoriesState from "@/hooks/useCategoriesState"
 import { fetchCategories } from "@/toolkit/slices/categorySlice"
 
@@ -23,7 +20,7 @@ const Products = () => {
   const [sortBy, setSortBy] = useState("price")
   const [sortDirection, setSortDirection] = useState("asc")
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
-  const [minPrice, setMinprice] = useState<number | undefined>(undefined)
+  const [minPrice, setMinPrice] = useState<number | undefined>(undefined)
   const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined)
 
   useEffect(() => {
@@ -63,7 +60,7 @@ const Products = () => {
     setSearchTerm(e.target.value)
   }
 
-  const handleSortChange = (e: SelectChangeEvent<any>) => {
+  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target
     if (name === "sortBy") {
       setSortBy(value)
@@ -81,7 +78,7 @@ const Products = () => {
   }
 
   const handleMinPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMinprice(Number(e.target.value))
+    setMinPrice(Number(e.target.value))
   }
 
   const handleMaxPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -98,56 +95,42 @@ const Products = () => {
         handleMaxPriceChange={handleMaxPriceChange}
       />
 
-      <div className="w-full md:w-3/4 p-4">
+      <div className="  w-full md:w-3/4 p-4">
         {isLoading && <h2 className="text-red-500">Loading...</h2>}
         {error && <p className="text-red-500">Error: {error}</p>}
 
-        <div className="flex flex-col md:flex-row items-center mb-4 space-y-4 md:space-y-0 md:space-x-4">
-          <TextField
-            type="text"
-            placeholder="Search Products"
-            value={searchTerm}
-            onChange={handleSearchChange}
-            className="w-full md:w-1/3 p-2 rounded border border-gray-300 focus:outline-none"
-            InputLabelProps={{
-              className: "customInputLabel" // Apply custom styles to the input label
-            }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-              style: { color: "black", borderColor: "black" }, // Set the text and border color
-              classes: {
-                focused: "focusedInput" // Apply the focusedInput class when TextField is focused
-              }
-            }}
-          />
-          <Select
-            value={sortBy}
-            onChange={handleSortChange}
-            name="sortBy"
-            className="w-full md:w-1/6 border border-gray-300 focus:outline-none"
-          >
-            <MenuItem value="price">Price</MenuItem>
-            <MenuItem value="name">Name</MenuItem>
-          </Select>
-          <Select
-            value={sortDirection}
-            onChange={handleSortChange}
-            name="sortDirection"
-            className="w-full md:w-1/6 border border-gray-300 focus:outline-none"
-          >
-            <MenuItem value="asc">Ascending</MenuItem>
-            <MenuItem value="desc">Descending</MenuItem>
-          </Select>
+        <div className="flex justify-center items-center">
+          <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 ">
+            <input
+              type="text"
+              placeholder="Search Products"
+              value={searchTerm}
+              onChange={handleSearchChange}
+              className="w-full md:w-1/3 p-2 rounded border border-gray-300 focus:outline-none search__product"
+            />
+            <select
+              value={sortBy}
+              onChange={handleSortChange}
+              name="sortBy"
+              className="w-full md:w-1/6 border border-gray-300 focus:outline-none"
+            >
+              <option value="price">Price</option>
+              <option value="name">Name</option>
+            </select>
+            <select
+              value={sortDirection}
+              onChange={handleSortChange}
+              name="sortDirection"
+              className="w-full md:w-1/6 border border-gray-300 focus:outline-none"
+            >
+              <option value="asc">Ascending</option>
+              <option value="desc">Descending</option>
+            </select>
+          </div>
         </div>
 
-        <h2 className="text-lg font-semibold mb-4">List of Products</h2>
-
         {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
           {products &&
             products.map((product) => <SingleProduct key={product.productId} product={product} />)}
         </div>
@@ -162,13 +145,13 @@ const Products = () => {
             Previous
           </button>
           {Array.from({ length: totalPages }, (_, index) => (
-            <Button
+            <button
               key={index}
               onClick={() => setPageNumber(index + 1)}
               className="btn btn-primary mr-2"
             >
               {index + 1}
-            </Button>
+            </button>
           ))}
           <button
             onClick={handleNextPage}

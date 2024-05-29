@@ -141,161 +141,168 @@ export const AdminProductsManagement = () => {
   }
 
   return (
-    <div className="container flex-space-around">
+    <div className="container main-container mx-auto flex">
       <AdminSidebar />
-      <div className="main-container">
+      <div className="flex-grow">
         {isLoading && <h2>Loading...</h2>}
-        {error && <p>Error{error}</p>}
+        {error && <p>Error: {error}</p>}
 
-        <div className="card">
-          <h2>{isEdit ? "Edit Product" : "Create Product"}</h2>
+        <div className="card p-4">
+          <h2 className="text-xl font-bold mb-4">{isEdit ? "Edit Product" : "Create Product"}</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="form-field">
-              <label htmlFor="image">Image:</label>
-              <input
-                type="file"
-                accept="image/*"
-                {...register("image", {
-                  required: "image is required"
-                })}
-                onChange={handleImageChange}
-              />
-              {errors.image && <p>{errors.image.message}</p>}
-              {imagePreview && <img src={imagePreview} alt="image preview" className="table-img" />}
-            </div>
-            <div className="form-field">
-              <label htmlFor="name">Name:</label>
-              <input
-                type="text"
-                {...register("name", {
-                  required: "name is required",
-                  minLength: {
-                    value: 2,
-                    message: "Name must be at least 2 characters"
-                  }
-                })}
-              />
-              {errors.name && <p>{errors.name.message}</p>}
-            </div>
+            <div className="form-field mb-4">
+              <div className="form-group mb-4">
+                <label htmlFor="name" className="block mb-2">
+                  Name:
+                </label>
+                <input
+                  type="text"
+                  {...register("name", {
+                    required: "Name is required",
+                    minLength: {
+                      value: 2,
+                      message: "Name must be at least 2 characters"
+                    }
+                  })}
+                  className="border border-gray-300 rounded px-3 py-2 "
+                />
+                {errors.name && <p className="text-red-500 mt-1">{errors.name.message}</p>}
+              </div>
 
-            <div className="form-field">
-              <label htmlFor="name">Price:</label>
-              <input
-                type="number"
-                step="0.01"
-                {...register("price", {
-                  required: "price is required",
-                  validate: validatePositiveNumber
-                })}
-              />
-              {errors.price && <p>{errors.price.message}</p>}
-            </div>
+              <div className="form-field mb-4">
+                <label htmlFor="description" className="block mb-2">
+                  Description:
+                </label>
+                <textarea
+                  id="description"
+                  {...register("description")}
+                  className="border border-gray-300 rounded px-3 py-2 "
+                ></textarea>
+              </div>
 
-            <div className="form-field">
-              <label htmlFor="quantity">Quantity:</label>
-              <input
-                type="number"
-                {...register("quantity", {
-                  required: "quantity is required",
-                  validate: validatePositiveNumber
-                })}
-              />
-              {errors.quantity && <p>{errors.quantity.message}</p>}
-            </div>
+              <div className="form-field mb-4">
+                <label htmlFor="price" className="block mb-2">
+                  Price:
+                </label>
+                <input
+                  type="number"
+                  step="0.01"
+                  {...register("price", {
+                    required: "Price is required",
+                    validate: validatePositiveNumber
+                  })}
+                  className="border border-gray-300 rounded px-3 py-2 "
+                />
+                {errors.price && <p className="text-red-500 mt-1">{errors.price.message}</p>}
+              </div>
 
-            {/* categories */}
-            {/* Controler hook form */}
-            <div className="form-field">
-              <label htmlFor="categories">Categories: </label>
-              <Controller
-                name="categoriesId"
-                control={control}
-                render={({ field }) => (
-                  <select
-                    {...field}
-                    onChange={(e) => {
-                      const selectedValue = e.target.value
-                      setValue("categoriesId", selectedValue)
-                    }}
-                  >
-                    {categories.map((category) => (
-                      <option key={category.categoryId} value={category.categoryId}>
-                        {category.name} {/* Render category name here */}
-                      </option>
-                    ))}
-                  </select>
+              <div className="form-field mb-4">
+                <label htmlFor="quantity" className="block mb-2">
+                  Quantity:
+                </label>
+                <input
+                  type="number"
+                  {...register("quantity", {
+                    required: "Quantity is required",
+                    validate: validatePositiveNumber
+                  })}
+                  className="border border-gray-300 rounded px-3 py-2"
+                />
+                {errors.quantity && <p className="text-red-500 mt-1">{errors.quantity.message}</p>}
+              </div>
+
+              <div className="form-field mb-4">
+                <label htmlFor="image" className="block mb-2">
+                  Image:
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  {...register("image", {
+                    required: "Image is required"
+                  })}
+                  onChange={handleImageChange}
+                  className="border border-gray-300 rounded px-3 py-2"
+                />
+                {errors.image && <p className="text-red-500 mt-1">{errors.image.message}</p>}
+                {imagePreview && (
+                  <img src={imagePreview} alt="Preview" className="mt-4 image__preview" />
                 )}
-              />
-            </div>
-            {/* 
-            <div className="form-field">
-              <label htmlFor="categories">Categories: </label>
-              <select {...register("categoriesId")}>
-                <option value="">Select Category</option>
-                {categories &&
-                  categories.map((category) => (
-                    <option key={category.categoryId} value={category.categoryId}>
-                      {category.name}
-                    </option>
-                  ))}
-              </select>
-              {errors.categoriesId && <p>{errors.categoriesId.message}</p>}
-            </div> */}
+              </div>
 
-            <div className="form-field">
-              <label htmlFor="description">Description: </label>
-              <textarea id="" {...register("description")}></textarea>
-            </div>
+              <div className="form-field mb-4">
+                <label htmlFor="categories" className="block mb-2">
+                  Categories:
+                </label>
+                <Controller
+                  name="categoriesId"
+                  control={control}
+                  render={({ field }) => (
+                    <select
+                      {...field}
+                      onChange={(e) => {
+                        const selectedValue = e.target.value
+                        setValue("categoriesId", selectedValue)
+                      }}
+                      className="border border-gray-300 rounded px-3 py-2"
+                    >
+                      {categories.map((category) => (
+                        <option key={category.categoryId} value={category.categoryId}>
+                          {category.name}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                />
+              </div>
 
-            <button type="submit" className="btn">
-              {isEdit ? "Update Product" : "Create Product"}
-            </button>
+              <button type="submit" className="button__add  py-2 px-4 rounded">
+                {isEdit ? "Update Product" : "Create Product"}
+              </button>
+            </div>
           </form>
         </div>
         <br />
 
-        <h2>List of Products</h2>
+        <h2 className="title">List of Products</h2>
 
-        <table>
+        <table className="product-table w-full border-collapse border border-gray-300">
           <thead>
-            <tr>
-              <th>Image</th>
-              <th>Name</th>
-              <th>Categories</th>
-              <th>Description</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Actions</th>
+            <tr className="bg-gray-200">
+              <th className="border border-gray-300 px-4 py-2">Image</th>
+              <th className="border border-gray-300 px-4 py-2">Name</th>
+              <th className="border border-gray-300 px-4 py-2">Categories</th>
+              <th className="border border-gray-300 px-4 py-2">Description</th>
+              <th className="border border-gray-300 px-4 py-2">Price</th>
+              <th className="border border-gray-300 px-4 py-2">Quantity</th>
+              <th className="border border-gray-300 px-4 py-2">Actions</th>
             </tr>
           </thead>
           <tbody>
             {products &&
               products.length > 0 &&
               products.map((product) => (
-                // <SingleCategory key={category.categoryId} category={category} />
-                <tr key={product.productId}>
-                  <td>
-                    <img src={product.image} alt={product.name} className="table-img" />
+                <tr key={product.productId} className="bg-white">
+                  <td className="border border-gray-300 px-4 py-2">
+                    <img src={product.image} alt={product.name} className="image__preview" />
                   </td>
-                  <td>{product.name}</td>
-                  <td>{product.category.name}</td>
-                  <td>{product.description.substring(0, 100)}...</td>
-                  <td>{product.price}</td>
-                  <td>{product.quantity}</td>
-                  <td>
+                  <td className="border border-gray-300 px-4 py-2">{product.name}</td>
+                  <td className="border border-gray-300 px-4 py-2">{product.category.name}</td>
+                  <td className="border border-gray-300 px-4 py-2">
+                    {product.description.substring(0, 100)}...
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2">{product.price}</td>
+                  <td className="border border-gray-300 px-4 py-2">{product.quantity}</td>
+                  <td className="border border-gray-300 px-4 py-2">
                     <button
-                      className="btn"
-                      onClick={() => {
-                        handleEdit(product)
-                      }}
+                      className="button__edit  py-1 px-2 rounded  mr-2"
+                      onClick={() => handleEdit(product)}
                     >
                       Edit
                     </button>
                     <button
-                      className="btn delete-btn "
-                      onClick={() => {
-                        handleDelete(product.productId)
-                      }}
+                      className="button__delete  py-1 px-2 rounded  mr-2"
+                      onClick={() => handleDelete(product.productId)}
                     >
                       Delete
                     </button>
@@ -305,16 +312,28 @@ export const AdminProductsManagement = () => {
           </tbody>
         </table>
 
-        <div className="pagination">
-          <button onClick={handlePrevPage} disabled={pageNumber === 1}>
+        <div className="pagination mt-4">
+          <button
+            onClick={handlePrevPage}
+            disabled={pageNumber === 1}
+            className="btn bg-gray-300 text-gray-600 px-4 py-2 mr-2"
+          >
             Previous
           </button>
           {Array.from({ length: totalPages }, (_, index) => (
-            <button key={index} onClick={() => setPageNumber(index + 1)}>
+            <button
+              key={index}
+              onClick={() => setPageNumber(index + 1)}
+              className="btn bg-gray-300 text-gray-600 px-4 py-2 mr-2"
+            >
               {index + 1}
             </button>
           ))}
-          <button onClick={handleNextPage} disabled={pageNumber === totalPages}>
+          <button
+            onClick={handleNextPage}
+            disabled={pageNumber === totalPages}
+            className="btn bg-gray-300 text-gray-600 px-4 py-2"
+          >
             Next
           </button>
         </div>

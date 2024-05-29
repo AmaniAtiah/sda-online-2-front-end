@@ -10,7 +10,7 @@ const SingleProduct = (props: { product: Product }) => {
     <Link to={`/products/${product.productId}`}>
       <Card className="mb-4 card-wrapper">
         <CardContent>
-          <img src={product.image} alt={product.name} className=" w-full rounded" />
+          <img src={product.image} alt={product.name} className=" w-full rounded image__product" />
           <Typography
             variant="h5"
             component="h2"

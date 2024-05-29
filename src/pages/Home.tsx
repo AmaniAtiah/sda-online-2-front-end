@@ -5,7 +5,7 @@ import React from "react"
 export const Home = () => {
   return (
     <div>
-      <div className="container flex-space-around">
+      <div className="main-container flex-space-around">
         <PageTitle title="Home" />
         {/* <div className="sidebar-container">
           <ProductSidebar />

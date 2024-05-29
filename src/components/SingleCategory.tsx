@@ -30,7 +30,7 @@ const SingleCategory = (props: { category: Category }) => {
     // }
   }
   return (
-    <article className="product card">
+    <article className=" product card">
       <div className="category__body">
         <h3 className="category__name">{category.name}</h3>
         <p className="category__details">{category.description.substring(0, 100)}...</p>
